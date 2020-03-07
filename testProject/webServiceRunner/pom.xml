@@ -1,0 +1,46 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" 
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	 xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>org.example</groupId>
+  <artifactId>webServiceRunner</artifactId>
+  <version>0.1-SNAPSHOT</version>
+  <name>Jetty WebServiceRunner</name>
+  <packaging>war</packaging>
+
+  <properties>
+    <jettyVersion>9.4.27.v20200227</jettyVersion>
+  </properties>
+
+  <dependencies>
+    <dependency>
+      <groupId>org.example</groupId>
+      <artifactId>hello-world</artifactId>
+      <version>0.1-SNAPSHOT</version>
+      <type>war</type>
+    </dependency>
+  </dependencies>
+
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.eclipse.jetty</groupId>
+        <artifactId>jetty-maven-plugin</artifactId>
+        <version>${jettyVersion}</version>
+        <configuration>
+          <jettyXml>src/main/etc/jetty.xml,src/main/etc/jetty-http.xml,src/main/etc/jetty-ssl.xml,src/main/etc/jetty-https.xml</jettyXml>
+        </configuration>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <version>3.8.0</version>
+        <configuration>
+          <release>11</release>
+        </configuration>
+      </plugin>
+    </plugins>
+  </build>
+</project>
+
