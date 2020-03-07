@@ -37,17 +37,15 @@
     <Get class="org.eclipse.jetty.util.log.Log" name="rootLogger">
       <Call name="warn"><Arg>JENM-SSL SETTING UP KEYS</Arg></Call>
     </Get>
-  <Set name="KeyStorePath">src/main/etc/keystore</Set>
+  <Set name="KeyStorePath">src/main/etc/serverKeystore</Set>
   <Set name="KeyStoreType">JKS</Set>
   <Set name="KeyStoreProvider">SUN</Set>
   <Set name="KeyStorePassword">testtest</Set>
-<!--
   <Set name="TrustStorePath">src/main/etc/truststore</Set>
   <Set name="TrustStoreType">JKS</Set>
   <Set name="TrustStoreProvider">SUN</Set>
   <Set name="TrustStorePassword">testtest</Set>
   <Set name="NeedClientAuth">true</Set>
-  -->
   <Set name="RenegotiationAllowed">true</Set>
   <Set name="EndpointIdentificationAlgorithm"></Set>
   <Set name="ExcludeCipherSuites">
