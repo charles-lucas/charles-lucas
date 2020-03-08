@@ -20,6 +20,11 @@
       <version>0.1-SNAPSHOT</version>
       <type>war</type>
     </dependency>
+    <dependency>
+      <groupId>org.example</groupId>
+      <artifactId>ec-jks-keystores</artifactId>
+      <version>1-SNAPSHOT</version>
+    </dependency>
   </dependencies>
 
   <build>
@@ -29,7 +34,7 @@
         <artifactId>jetty-maven-plugin</artifactId>
         <version>${jettyVersion}</version>
         <configuration>
-          <jettyXml>src/main/etc/jetty.xml,src/main/etc/jetty-http.xml,src/main/etc/jetty-ssl.xml,src/main/etc/jetty-https.xml</jettyXml>
+          <jettyXml>${project.build.directory}/classes/jetty.xml,${project.build.directory}/classes/jetty-http.xml,${project.build.directory}/classes/jetty-ssl.xml,${project.build.directory}/classes/jetty-https.xml</jettyXml>
         </configuration>
       </plugin>
       <plugin>
@@ -39,6 +44,34 @@
         <configuration>
           <release>11</release>
         </configuration>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-dependency-plugin</artifactId>
+        <version>3.1.1</version>
+        <executions>
+          <execution>
+            <id>unpack-dependencies</id>
+            <phase>package</phase>
+            <goals>
+              <goal>unpack-dependencies</goal>
+            </goals>
+            <configuration>
+              <artifactItems>
+                <artifactItem>
+                  <groupId>org.example</groupId>
+                  <artifactId>ec-jks-keystores</artifactId>
+                  <version>1-SNAPSHOT</version>
+                  <overWrite>true</overWrite>
+                  <outputDirectory>${project.build.directory}/classes/</outputDirectory>
+                  <includes>**/keystore,**/serverKeystore,**/trustStore</includes>
+                </artifactItem>
+              </artifactItems>
+              <overWriteReleases>false</overWriteReleases>
+              <overWriteSnapshots>true</overWriteSnapshots>
+            </configuration>
+          </execution>
+        </executions>
       </plugin>
     </plugins>
   </build>

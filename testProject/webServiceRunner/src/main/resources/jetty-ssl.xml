@@ -37,11 +37,11 @@
     <Get class="org.eclipse.jetty.util.log.Log" name="rootLogger">
       <Call name="warn"><Arg>JENM-SSL SETTING UP KEYS</Arg></Call>
     </Get>
-  <Set name="KeyStorePath">src/main/etc/serverKeystore-ec</Set>
+  <Set name="KeyStorePath">target/dependency/keystore/serverKeystore</Set>
   <Set name="KeyStoreType">JKS</Set>
   <Set name="KeyStoreProvider">SUN</Set>
   <Set name="KeyStorePassword">testtest</Set>
-  <Set name="TrustStorePath">src/main/etc/truststore-ec</Set>
+  <Set name="TrustStorePath">target/dependency/keystore/truststore</Set>
   <Set name="TrustStoreType">JKS</Set>
   <Set name="TrustStoreProvider">SUN</Set>
   <Set name="TrustStorePassword">testtest</Set>
