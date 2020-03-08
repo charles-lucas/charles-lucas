@@ -4,7 +4,7 @@
   <groupId>org.example</groupId>
   <artifactId>testKeys</artifactId>
   <packaging>pom</packaging>
-  <name>testProject</name>
+  <name>testKeys</name>
   <version>0.1-SNAPSHOT</version>
 
   <modules>

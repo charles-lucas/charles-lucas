@@ -1,7 +1,7 @@
 <project>
   <modelVersion>4.0.0</modelVersion>
   <groupId>org.example</groupId>
-  <artifactId>ec-jks-keystores</artifactId>
+  <artifactId>ec-bcfks-keystores</artifactId>
   <version>1-SNAPSHOT</version>
   
   <dependencies>
