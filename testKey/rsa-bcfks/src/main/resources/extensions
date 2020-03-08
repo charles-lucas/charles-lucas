@@ -1,0 +1,6 @@
+authorityKeyIdentifier=keyid, issuer
+subjectKeyIdentifier=hash
+keyUsage=critical, digitalSignature, keyEncipherment
+certificatePolicies=2.16.840.1.101.2.1.11.5
+authorityInfoAccess=OCSP;URI:localhost
+subjectAltName=DNS:localhost

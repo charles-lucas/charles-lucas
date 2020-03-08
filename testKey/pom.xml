@@ -10,5 +10,7 @@
   <modules>
     <module>ec-jks</module>
     <module>rsa-jks</module>
+    <module>ec-bcfks</module>
+    <module>rsa-bcfks</module>
   </modules>
 </project>
