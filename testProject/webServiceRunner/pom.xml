@@ -28,6 +28,24 @@
   </dependencies>
 
   <build>
+  <!--
+    <pluginManagement>
+      <plugins>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-dependency-plugin</artifactId>
+          <version>3.1.1</version>
+          <dependencies>
+            <dependency>
+              <groupId>org.example</groupId>
+              <artifactId>ec-jks-keystores</artifactId>
+              <version>1-SNAPSHOT</version>
+            </dependency>
+          </dependencies>
+        </plugin>
+      </plugins>
+    </pluginManagement>
+    -->
     <plugins>
       <plugin>
         <groupId>org.eclipse.jetty</groupId>
@@ -52,21 +70,14 @@
         <executions>
           <execution>
             <id>unpack-dependencies</id>
-            <phase>package</phase>
+            <phase>process-resources</phase>
             <goals>
               <goal>unpack-dependencies</goal>
             </goals>
             <configuration>
-              <artifactItems>
-                <artifactItem>
-                  <groupId>org.example</groupId>
-                  <artifactId>ec-jks-keystores</artifactId>
-                  <version>1-SNAPSHOT</version>
-                  <overWrite>true</overWrite>
-                  <outputDirectory>${project.build.directory}/classes/</outputDirectory>
-                  <includes>**/keystore,**/serverKeystore,**/trustStore</includes>
-                </artifactItem>
-              </artifactItems>
+              <includesArtificatsIds>ec-jks-keystores</includesArtificatsIds>
+              <includes>**/keystore, **/truststore, **/serverKeystore</includes>
+              <outputDirectory>${project.build.directory}</outputDirectory>
               <overWriteReleases>false</overWriteReleases>
               <overWriteSnapshots>true</overWriteSnapshots>
             </configuration>

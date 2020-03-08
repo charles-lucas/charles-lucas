@@ -32,16 +32,15 @@
       </New>
     </Arg>
   </Call>
-  -->
   <New id="sslContextFactory" class="org.eclipse.jetty.util.ssl.SslContextFactory">
     <Get class="org.eclipse.jetty.util.log.Log" name="rootLogger">
       <Call name="warn"><Arg>JENM-SSL SETTING UP KEYS</Arg></Call>
     </Get>
-  <Set name="KeyStorePath">target/dependency/keystore/serverKeystore</Set>
+  <Set name="KeyStorePath">target/keystores/serverKeystore</Set>
   <Set name="KeyStoreType">JKS</Set>
   <Set name="KeyStoreProvider">SUN</Set>
   <Set name="KeyStorePassword">testtest</Set>
-  <Set name="TrustStorePath">target/dependency/keystore/truststore</Set>
+  <Set name="TrustStorePath">target/keystores/truststore</Set>
   <Set name="TrustStoreType">JKS</Set>
   <Set name="TrustStoreProvider">SUN</Set>
   <Set name="TrustStorePassword">testtest</Set>

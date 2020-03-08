@@ -66,14 +66,14 @@ mv *.p7b export/.
 
 echo "Java Keystore Files"
 #if not exist keystore mkdir keystore
-if [ ! -d keystore ]; then
-  mkdir keystore
+if [ ! -d keystores ]; then
+  mkdir keystores
 fi
-keytool -v -importkeystore -srckeystore "export/TEST_Client.p12" -srcstoretype PKCS12 -srcstorepass password -destkeystore keystore/keystore -deststorepass testtest
+keytool -v -importkeystore -srckeystore "export/TEST_Client.p12" -srcstoretype PKCS12 -srcstorepass password -destkeystore keystores/keystore -deststorepass testtest
 #keytool -v -importkeystore -srckeystore "export/TEST Client.p12" -srcstoretype PKCS12 -srcstorepass password -destkeystore keystore/jenmClientKeystore.bcfks -deststorepass password -deststoretype BCFKS -destprovidername BCFIPS -providerclass org.bouncycastle.jcajce.provider.BouncyCastleFipsProvider
 
-keytool -v -importkeystore -srckeystore "export/TEST_Server.p12" -srcstoretype PKCS12 -srcstorepass password -destkeystore keystore/serverKeystore -deststorepass testtest
+keytool -v -importkeystore -srckeystore "export/TEST_Server.p12" -srcstoretype PKCS12 -srcstorepass password -destkeystore keystores/serverKeystore -deststorepass testtest
 #keytool -v -importkeystore -srckeystore "export/TEST Server.p12" -srcstoretype PKCS12 -srcstorepass password -destkeystore keystore/jenmServerKeystore.bcfks -deststorepass password -deststoretype BCFKS -destprovidername BCFIPS -providerclass org.bouncycastle.jcajce.provider.BouncyCastleFipsProvider
 
-keytool -import -noprompt -file "export/TEST_Root.crt" -keystore keystore/truststore -storepass testtest
+keytool -import -noprompt -file "export/TEST_Root.crt" -keystore keystores/truststore -storepass testtest
 #keytool -v -import -noprompt -file "export/TEST Root.crt" -keystore keystore/jenmTruststore.bcfks -storepass password -storetype BCFKS -providername BCFIPS -providerclass org.bouncycastle.jcajce.provider.BouncyCastleFipsProvider
