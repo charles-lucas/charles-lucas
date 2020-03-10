@@ -6,40 +6,40 @@ rm *.key *.req *.srl *.crt *.pem *.pub *.p12 *.p7b *.jk *.param
 rm -rf export generated keystore
 
 echo "Making Root CA"
-openssl ecparam -genkey -name prime256v1 > root.ec.param
+openssl ecparam -genkey -name secp384r1 > root.ec.param
 cat root.ec.param | openssl ec -out root.ec.key
 openssl req -new -key root.ec.key -out root.ec.req -subj "/C=US/ST=CA/L=San Diego/O=TEST-EC/OU=TEST-EC/CN=TEST Root EC"
-openssl x509 -req -days 7300 -sha512 -in root.ec.req -CAcreateserial -signkey root.ec.key -out "TEST_Root.crt" -extfile rootExtensions
+openssl x509 -req -days 7300 -sha256 -in root.ec.req -CAcreateserial -signkey root.ec.key -out "TEST_Root.crt" -extfile rootExtensions
 cat "TEST_Root.crt" root.ec.key > root.ec.pem
 openssl ec -in root.ec.pem -pubout -out root.ec.pub
 openssl pkcs12 -export -in root.ec.pem -out "TEST_Root.p12" -name "TEST Root EC" -passout "pass:password"
 openssl crl2pkcs7 -nocrl -certfile root.ec.pem -out "TEST_Root.p7b"
 
 echo "Making Sub CA"
-openssl ecparam -genkey -name prime256v1 > subca.ec.param
+openssl ecparam -genkey -name secp384r1 > subca.ec.param
 cat subca.ec.param | openssl ec -out subca.ec.key
 openssl req -new -key subca.ec.key -out subca.ec.req -subj "/C=US/ST=CA/L=San Diego/O=TEST-EC/OU=TEST-EC/CN=TEST Sub CA EC"
-openssl x509 -req -days 7300 -sha512 -in subca.ec.req -CAcreateserial -CA "TEST_Root.crt" -CAkey root.ec.key -out "TEST_Sub_CA.crt" -extfile subCaExtensions
+openssl x509 -req -days 7300 -sha256 -in subca.ec.req -CAcreateserial -CA "TEST_Root.crt" -CAkey root.ec.key -out "TEST_Sub_CA.crt" -extfile subCaExtensions
 cat "TEST_Root.crt" "TEST_Sub_CA.crt" subca.ec.key > subca.ec.pem
 openssl ec -in subca.ec.pem -pubout -out subca.ec.pub
 openssl pkcs12 -export -in subca.ec.pem -out "TEST_Sub_CA.p12" -name "TEST Sub CA EC" -passout "pass:password"
 openssl crl2pkcs7 -nocrl -certfile subca.ec.pem -out "TEST_Sub_CA.p7b"
 
 echo "Making Server Credential"
-openssl ecparam -genkey -name prime256v1 > server.ec.param
+openssl ecparam -genkey -name secp384r1 > server.ec.param
 cat server.ec.param | openssl ec -out server.ec.key
 openssl req -new -key server.ec.key -out server.ec.req -subj "/C=US/ST=CA/L=San Diego/O=TEST-EC/OU=TEST-EC/CN=localhost"
-openssl x509 -req -days 1825 -sha512 -in server.ec.req -CAcreateserial -CA "TEST_Sub_CA.crt" -CAkey subca.ec.key -out "TEST_Server.crt" -extfile extensions
+openssl x509 -req -days 1825 -sha256 -in server.ec.req -CAcreateserial -CA "TEST_Sub_CA.crt" -CAkey subca.ec.key -out "TEST_Server.crt" -extfile extensions
 cat "TEST_Root.crt" "TEST_Sub_CA.crt" "TEST_Server.crt" server.ec.key > server.ec.pem
 openssl ec -in server.ec.pem -pubout -out server.ec.pub
 openssl pkcs12 -export -in server.ec.pem -out "TEST_Server.p12" -name "TEST Server EC" -passout "pass:password"
 openssl crl2pkcs7 -nocrl -certfile server.ec.pem -out "TEST_Server.p7b"
 
 echo "Making Client Credential"
-openssl ecparam -genkey -name prime256v1 > client.ec.param
+openssl ecparam -genkey -name secp384r1 > client.ec.param
 cat client.ec.param | openssl ec -out client.ec.key
 openssl req -new -key client.ec.key -out client.ec.req -subj "/C=US/ST=CA/L=San Diego/O=TEST-EC/OU=TEST-EC/CN=TEST Client EC"
-openssl x509 -req -days 1825 -sha512 -in client.ec.req -CAcreateserial -CA "TEST_Sub_CA.crt" -CAkey subca.ec.key -out "TEST_Client.crt" -extfile extensions
+openssl x509 -req -days 1825 -sha256 -in client.ec.req -CAcreateserial -CA "TEST_Sub_CA.crt" -CAkey subca.ec.key -out "TEST_Client.crt" -extfile extensions
 cat "TEST_Root.crt" "TEST_Sub_CA.crt" "TEST_Client.crt" client.ec.key > client.ec.pem
 openssl ec -in client.ec.pem -pubout -out client.ec.pub
 openssl pkcs12 -export -in client.ec.pem -out "TEST_Client.p12" -name "TEST Client EC" -passout "pass:password"

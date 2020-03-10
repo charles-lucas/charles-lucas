@@ -3,9 +3,11 @@
 <!-- ============================================================= --><!-- Base SSL configuration                                        --><!-- This configuration needs to be used together with 1 or more   --><!-- of jetty-https.xml or jetty-http2.xml                         --><!-- ============================================================= -->
 <Configure id="Server" class="org.eclipse.jetty.server.Server">
 
-  <!-- =========================================================== -->
+
+  <!-- ===========================================================  -->
   <!-- Add an SSL Connector with no protocol factories              -->
-  <!-- =========================================================== -->
+  <!-- XXX                                                          -->
+  <!-- ===========================================================  -->
   <Call  name="addConnector">
     <Arg>
       <New id="sslConnector" class="org.eclipse.jetty.server.ServerConnector">
@@ -34,20 +36,22 @@
   </Call>
   <New id="sslContextFactory" class="org.eclipse.jetty.util.ssl.SslContextFactory">
     <Get class="org.eclipse.jetty.util.log.Log" name="rootLogger">
-      <Call name="warn"><Arg>JENM-SSL SETTING UP KEYS</Arg></Call>
+      <Call name="warn"><Arg>Test-SSL SETTING UP KEYS</Arg></Call>
     </Get>
-  <Set name="KeyStorePath">target/keystores/serverKeystore</Set>
-  <Set name="KeyStoreType">JKS</Set>
-  <Set name="KeyStoreProvider">SUN</Set>
-  <Set name="KeyStorePassword">testtest</Set>
-  <Set name="TrustStorePath">target/keystores/truststore</Set>
-  <Set name="TrustStoreType">JKS</Set>
-  <Set name="TrustStoreProvider">SUN</Set>
-  <Set name="TrustStorePassword">testtest</Set>
-  <Set name="NeedClientAuth">true</Set>
-  <Set name="RenegotiationAllowed">true</Set>
-  <Set name="EndpointIdentificationAlgorithm"></Set>
-  <Set name="ExcludeCipherSuites">
+    
+    <Set name="KeyStorePath">target/keystores/serverKeystore</Set>
+    <Set name="KeyStoreType">BCFKS</Set>
+    <Set name="KeyStoreProvider">BCFIPS</Set>
+    <Set name="KeyStorePassword">testtest</Set>
+    <Set name="KeyManagerPassword">password</Set>
+    <Set name="TrustStorePath">target/keystores/truststore</Set>
+    <Set name="TrustStoreType">BCFKS</Set>
+    <Set name="TrustStoreProvider">BCFIPS</Set>
+    <Set name="TrustStorePassword">testtest</Set>
+    <Set name="NeedClientAuth">true</Set>
+    <Set name="RenegotiationAllowed">true</Set>
+    <Set name="EndpointIdentificationAlgorithm"></Set>
+    <Set name="ExcludeCipherSuites">
     <Array type="String">
       <Item>SSL_RSA_WITH_DES_CBC_SHA</Item>
       <Item>SSL_DHE_RSA_WITH_DES_CBC_SHA</Item>
@@ -79,5 +83,9 @@
       </Arg>
     </Call>
   </New>
+
+    <Get class="org.eclipse.jetty.util.log.Log" name="rootLogger">
+    <Call name="warn"><Arg>Test-SSL DONE SETTING UP KEYS</Arg></Call>
+  </Get>
 
 </Configure>

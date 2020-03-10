@@ -22,37 +22,46 @@
     </dependency>
     <dependency>
       <groupId>org.example</groupId>
-      <artifactId>ec-jks-keystores</artifactId>
+      <artifactId>ec-bcfks-keystores</artifactId>
       <version>1-SNAPSHOT</version>
     </dependency>
   </dependencies>
 
   <build>
-  <!--
+
     <pluginManagement>
       <plugins>
         <plugin>
-          <groupId>org.apache.maven.plugins</groupId>
-          <artifactId>maven-dependency-plugin</artifactId>
-          <version>3.1.1</version>
+          <groupId>org.eclipse.jetty</groupId>
+          <artifactId>jetty-maven-plugin</artifactId>
+          <version>${jetty-version}</version>
           <dependencies>
             <dependency>
-              <groupId>org.example</groupId>
-              <artifactId>ec-jks-keystores</artifactId>
-              <version>1-SNAPSHOT</version>
+              <groupId>org.eclipse.jetty</groupId>
+              <artifactId>jetty-deploy</artifactId>
+              <version>${jettyVersion}</version>
+            </dependency>
+           <dependency>
+              <groupId>mil.jetty</groupId>
+              <artifactId>jetty-listener</artifactId>
+              <type>jar</type>
+              <version>0.1-SNAPSHOT</version>
             </dependency>
           </dependencies>
         </plugin>
       </plugins>
-    </pluginManagement>
-    -->
+  </pluginManagement>
+
     <plugins>
       <plugin>
         <groupId>org.eclipse.jetty</groupId>
         <artifactId>jetty-maven-plugin</artifactId>
         <version>${jettyVersion}</version>
         <configuration>
+          <!--
           <jettyXml>${project.build.directory}/classes/jetty.xml,${project.build.directory}/classes/jetty-http.xml,${project.build.directory}/classes/jetty-ssl.xml,${project.build.directory}/classes/jetty-https.xml</jettyXml>
+          -->
+          <jettyXml>${project.build.directory}/classes/jetty.xml,${project.build.directory}/classes/jetty-bc.xml,${project.build.directory}/classes/jetty-http.xml,${project.build.directory}/classes/jetty-ssl.xml,${project.build.directory}/classes/jetty-https.xml</jettyXml>
         </configuration>
       </plugin>
       <plugin>
@@ -75,7 +84,7 @@
               <goal>unpack-dependencies</goal>
             </goals>
             <configuration>
-              <includesArtificatsIds>ec-jks-keystores</includesArtificatsIds>
+              <includesArtificatsIds>ec-bcfks-keystores</includesArtificatsIds>
               <includes>**/keystore, **/truststore, **/serverKeystore</includes>
               <outputDirectory>${project.build.directory}</outputDirectory>
               <overWriteReleases>false</overWriteReleases>

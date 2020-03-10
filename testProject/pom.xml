@@ -9,6 +9,7 @@
 
   <modules>
     <module>HelloWorld</module>
+    <module>jetty-listener</module>
     <module>webServiceRunner</module>
   </modules>
 </project>

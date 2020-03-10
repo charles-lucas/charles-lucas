@@ -1,0 +1,113 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+ xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>mil.jetty</groupId>
+  <artifactId>jetty-listener</artifactId>
+  <name>Jetty Listener</name>
+  <version>0.1-SNAPSHOT</version>
+  <packaging>jar</packaging>
+ 
+  <properties>
+     <jettyVersion>9.4.27.v20200227</jettyVersion>
+  </properties>
+
+  <dependencies>
+
+      <!-- Jetty Dependencies -->
+
+      <dependency>
+        <groupId>org.eclipse.jetty</groupId>
+        <artifactId>jetty-server</artifactId>
+        <version>${jettyVersion}</version>
+      </dependency>
+<!--
+      <dependency>
+        <groupId>org.eclipse.jetty</groupId>
+        <artifactId>jetty-util</artifactId>
+        <version>${jettyVersion}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.eclipse.jetty.websocket</groupId>
+        <artifactId>javax-websocket-server-impl</artifactId>
+        <version>${jettyVersion}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.eclipse.jetty</groupId>
+        <artifactId>jetty-webapp</artifactId>
+        <version>${jettyVersion}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.eclipse.jetty</groupId>
+        <artifactId>jetty-io</artifactId>
+        <version>${jettyVersion}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.eclipse.jetty</groupId>
+        <artifactId>jetty-annotations</artifactId>
+        <version>${jettyVersion}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.eclipse.jetty</groupId>
+        <artifactId>jetty-servlets</artifactId>
+        <version>${jettyVersion}</version>
+      </dependency>
+-->
+
+      <!-- -->
+      <!-- Bouncy Castle Dependencies -->
+      <!-- -->
+      <dependency>
+        <groupId>org.bouncycastle</groupId>
+        <artifactId>bc-fips</artifactId>
+        <version>1.0.2</version>
+        <type>jar</type>
+      </dependency>
+      <dependency>
+        <groupId>org.bouncycastle</groupId>
+        <artifactId>bctls-fips</artifactId>
+        <version>1.0.9</version>
+        <type>jar</type>
+      </dependency>
+      <dependency>
+        <groupId>org.bouncycastle</groupId>
+        <artifactId>bcpkix-fips</artifactId>
+        <version>1.0.3</version>
+        <type>jar</type>
+      </dependency>
+      <!--
+      <dependency>
+        <groupId>org.bouncycastle</groupId>
+        <artifactId>bcmail-fips</artifactId>
+        <version>1.0.1</version>
+        <type>jar</type>
+      </dependency>
+      <dependency>
+        <groupId>org.bouncycastle</groupId>
+        <artifactId>bcpg-fips</artifactId>
+        <version>1.0.3</version>
+        <type>jar</type>
+      </dependency>
+      -->
+
+
+  </dependencies>
+
+  <build>
+   <plugins>
+      <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-compiler-plugin</artifactId>
+          <version>3.8.1</version>
+          <configuration>
+            <forceJavacCompilerUse>true</forceJavacCompilerUse>
+            <encoding>UTF-8</encoding>
+            <release>11</release>
+            <showWarnings>true</showWarnings>
+            <showDeprecation>true</showDeprecation>
+          </configuration>
+     </plugin>
+  </plugins>
+ </build>
+</project>
