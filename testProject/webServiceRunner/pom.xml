@@ -25,36 +25,6 @@
       <artifactId>ec-bcfks-keystores</artifactId>
       <version>1-SNAPSHOT</version>
     </dependency>
-    <dependency>
-        <groupId>org.bouncycastle</groupId>
-        <artifactId>bc-fips</artifactId>
-        <version>1.0.2</version>
-        <type>jar</type>
-      </dependency>
-      <dependency>
-        <groupId>org.bouncycastle</groupId>
-        <artifactId>bctls-fips</artifactId>
-        <version>1.0.9</version>
-        <type>jar</type>
-      </dependency>
-      <dependency>
-        <groupId>org.bouncycastle</groupId>
-        <artifactId>bcmail-fips</artifactId>
-        <version>1.0.1</version>
-        <type>jar</type>
-      </dependency>
-      <dependency>
-        <groupId>org.bouncycastle</groupId>
-        <artifactId>bcpg-fips</artifactId>
-        <version>1.0.3</version>
-        <type>jar</type>
-      </dependency>
-      <dependency>
-        <groupId>org.bouncycastle</groupId>
-        <artifactId>bcpkix-fips</artifactId>
-        <version>1.0.3</version>
-        <type>jar</type>
-      </dependency>
     </dependencies>
   <build>
 
@@ -89,9 +59,9 @@
         <configuration>
           <!--
           <jettyXml>${project.build.directory}/classes/jetty.xml,${project.build.directory}/classes/jetty-http.xml,${project.build.directory}/classes/jetty-ssl.xml,${project.build.directory}/classes/jetty-https.xml</jettyXml>
-          <jettyXml>${project.build.directory}/classes/jetty.xml,${project.build.directory}/classes/jetty-bc.xml,${project.build.directory}/classes/jetty-http.xml,${project.build.directory}/classes/jetty-ssl.xml,${project.build.directory}/classes/jetty-ssl-context.xml,${project.build.directory}/classes/jetty-https.xml,${project.build.directory}/classes/tweak-ssl.xml</jettyXml>
-          -->
           <jettyXml>${project.build.directory}/classes/jetty.xml,${project.build.directory}/classes/jetty-bc.xml,${project.build.directory}/classes/jetty-http.xml,${project.build.directory}/classes/jetty-ssl.xml,${project.build.directory}/classes/jetty-https.xml,${project.build.directory}/classes/tweak-ssl.xml</jettyXml>
+          -->
+          <jettyXml>${project.build.directory}/classes/jetty.xml,${project.build.directory}/classes/jetty-bc.xml,${project.build.directory}/classes/jetty-http.xml,${project.build.directory}/classes/jetty-ssl.xml,${project.build.directory}/classes/jetty-ssl-context.xml,${project.build.directory}/classes/jetty-https.xml,${project.build.directory}/classes/tweak-ssl.xml</jettyXml>
           <webApp>
             <contextPath>/</contextPath>
             <webInfIncludeJarPattern>NONE</webInfIncludeJarPattern>

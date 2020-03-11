@@ -18,12 +18,27 @@
   </Call>
   
   <Call class="java.security.Security" name="insertProviderAt">
-        <Arg>
-                <New class="org.bouncycastle.jsse.provider.BouncyCastleJsseProvider" >
-                        <Arg>fips:BCFIPS</Arg>
-                </New>
-        </Arg>
-        <Arg type="int">2</Arg>
+    <Arg>
+      <New class="org.bouncycastle.jsse.provider.BouncyCastleJsseProvider" >
+        <Arg>fips:BCFIPS</Arg>
+      </New>
+    </Arg>
+    <Arg type="int">2</Arg>
+  </Call>
+  <!--
+  <Call class="java.security.Security" name="addProvider">
+    <Arg>
+      <New class="org.bouncycastle.jcajce.provider.BouncyCastleFipsProvider" />
+    </Arg>
+  </Call>
+  
+  <Call class="java.security.Security" name="addProvider">
+    <Arg>
+      <New class="org.bouncycastle.jsse.provider.BouncyCastleJsseProvider" >
+        <Arg>fips:BCFIPS</Arg>
+      </New>
+    </Arg>
 </Call>
+  -->
 
 </Configure>

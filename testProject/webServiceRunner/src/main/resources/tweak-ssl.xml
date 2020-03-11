@@ -9,6 +9,9 @@
         <Item>.*_RSA_.*SHA1$</Item>
         <Item>.*_RSA_.*SHA$</Item>
         <Item>.*_RSA_.*MD5$</Item>
+        <Item>.*_CBC_.*</Item>
+        <Item>TLS_RSA_WITH_AES_256_GCM_SHA384</Item>
+        <Item>TLS_RSA_WITH_AES_128_GCM_SHA256</Item>
       </Array>
     </Arg>
   </Call>
