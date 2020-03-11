@@ -20,13 +20,7 @@ public class JettyLifecycleListener extends AbstractLifeCycleListener {
    * JETTY life cycle listener Constructor
    */
   public JettyLifecycleListener() {
-    //ConfigureFipsMode.configureFipsMode();
-	
-	
-    // check JMX password, update per session
-//    JmxPassword.updatePassword();
-    
-//	this.jettyFileCtrl = new JettyLifecycleFileControl();
+    ConfigureFipsMode.configureFipsMode();
   }
 
   /**
@@ -49,10 +43,6 @@ public class JettyLifecycleListener extends AbstractLifeCycleListener {
   @Override
   public void lifeCycleStopping(LifeCycle event) {
     System.out.println("Jetty Stopping");
-    // clear jetty and files
-    // which were created in temporary folder
-    // when jetty startup
-//    this.jettyFileCtrl.clearTempFileAsJettyServiceStop();
     System.clearProperty("hostPort");
   }
 

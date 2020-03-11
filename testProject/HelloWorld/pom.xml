@@ -1,7 +1,5 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" 
-         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
-	 xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
- 
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+
   <modelVersion>4.0.0</modelVersion>
   <groupId>org.example</groupId>
   <artifactId>hello-world</artifactId>
@@ -16,7 +14,7 @@
       <version>9.4.27.v20200227</version>
     </dependency>
   </dependencies>
- 
+
   <build>
     <plugins>
       <plugin>
@@ -38,13 +36,24 @@
         <groupId>org.eclipse.jetty</groupId>
         <artifactId>jetty-maven-plugin</artifactId>
         <version>9.4.27.v20200227</version>
+        <configuration>
+        <webApp>
+           <contextPath>/</contextPath>
+           <webInfIncludeJarPattern>NONE</webInfIncludeJarPattern>
+         </webApp>
+         <stopPort>8079</stopPort>
+         <stopKey>stop</stopKey>
+        </configuration>
       </plugin>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-compiler-plugin</artifactId>
-        <version>3.8.0</version>
+        <version>3.8.1</version>
         <configuration>
           <release>11</release>
+          <showDeprication>true</showDeprication>
+          <showWarnings>true</showWarnings>
+          <verbose>false</verbose>
         </configuration>
       </plugin>
       <plugin>

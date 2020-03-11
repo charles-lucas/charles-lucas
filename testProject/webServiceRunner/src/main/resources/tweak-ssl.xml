@@ -1,0 +1,15 @@
+<!DOCTYPE Configure PUBLIC "-//Jetty//Configure//EN"
+          "http://www.eclipse.org/jetty/configure_9_3.dtd">
+<!-- Tweak SsslContextFactory Includes / Excludes -->
+<Configure id="sslContextFactory" class="org.eclipse.jetty.util.ssl.SslContextFactory$Server">
+  <!-- Mitigate SLOTH Attack -->
+  <Call name="addExcludeCipherSuites">
+    <Arg>
+      <Array type="String">
+        <Item>.*_RSA_.*SHA1$</Item>
+        <Item>.*_RSA_.*SHA$</Item>
+        <Item>.*_RSA_.*MD5$</Item>
+      </Array>
+    </Arg>
+  </Call>
+</Configure>
