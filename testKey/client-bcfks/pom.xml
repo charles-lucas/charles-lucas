@@ -1,30 +1,35 @@
 <project>
   <modelVersion>4.0.0</modelVersion>
   <groupId>org.example</groupId>
-  <artifactId>rsa-bcfks-keystores</artifactId>
+  <artifactId>clients-bcfks-keystores</artifactId>
   <version>1-SNAPSHOT</version>
-
+  
   <dependencies>
     <dependency>
       <groupId>org.bouncycastle</groupId>
       <artifactId>bc-fips</artifactId>
       <version>1.0.2</version>
     </dependency>
-    <!--
     <dependency>
-      <groupId>org.bouncycastle</groupId>
-      <artifactId>bcpkix-fips</artifactId>
-      <version>1.0.3</version>
+      <groupId>org.example</groupId>
+      <artifactId>ca-bcfks-keystores</artifactId>
+      <version>1-SNAPSHOT</version>
     </dependency>
     <dependency>
-      <groupId>org.bouncycastle</groupId>
-      <artifactId>bctls-fips</artifactId>
-      <version>1.0.9</version>
+      <groupId>org.example</groupId>
+      <artifactId>subca-bcfks-keystores</artifactId>
+      <version>1-SNAPSHOT</version>
     </dependency>
-    -->
   </dependencies>
 
   <build>
+
+    <resources>
+      <resource>
+        <directory>src/main/resources</directory>
+        <filtering>true</filtering>
+      </resource>
+    </resources>
 
     <plugins>
       <plugin>
@@ -48,6 +53,7 @@
           </arguments>
         </configuration>
       </plugin>
+
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-dependency-plugin</artifactId>
@@ -74,13 +80,14 @@
         <version>1.5</version>
         <executions>
           <execution>
-          <id>importClient</id>
+          <id>importClient-ec</id>
             <goals>
               <goal>importKeystore</goal>
             </goals>
             <phase>compile</phase>
             <configuration>
-              <srckeystore>${project.build.directory}/classes/export/TEST_Client.p12</srckeystore>
+              <alias>test-client-ec</alias>
+              <srckeystore>${project.build.directory}/classes/export/TEST_Client_EC.p12</srckeystore>
               <srcstoretype>PKCS12</srcstoretype>
               <srcstorepass>password</srcstorepass>
               <destkeystore>${project.build.directory}/classes/keystores/keystore</destkeystore>
@@ -93,13 +100,34 @@
             </configuration>
           </execution>
           <execution>
-            <id>importServer</id>
+          <id>importClient-rsa</id>
             <goals>
               <goal>importKeystore</goal>
             </goals>
             <phase>compile</phase>
             <configuration>
-              <srckeystore>${project.build.directory}/classes/export/TEST_Server.p12</srckeystore>
+              <alias>test-client-rsa</alias>
+              <srckeystore>${project.build.directory}/classes/export/TEST_Client_RSA.p12</srckeystore>
+              <srcstoretype>PKCS12</srcstoretype>
+              <srcstorepass>password</srcstorepass>
+              <destkeystore>${project.build.directory}/classes/keystores/keystore</destkeystore>
+              <deststorepass>testtest</deststorepass>
+              <deststoretype>BCFKS</deststoretype>
+              <destprovidername>BCFIPS</destprovidername>
+              <providerclass>org.bouncycastle.jcajce.provider.BouncyCastleFipsProvider</providerclass>
+              <providerpath>${project.build.directory}/libs/bc-fips-1.0.2.jar</providerpath>
+              <verbose>true</verbose>
+            </configuration>
+          </execution>
+          <execution>
+            <id>importServer-ec</id>
+            <goals>
+              <goal>importKeystore</goal>
+            </goals>
+            <phase>compile</phase>
+            <configuration>
+              <alias>test-server-ec</alias>
+              <srckeystore>${project.build.directory}/classes/export/TEST_Server_EC.p12</srckeystore>
               <srcstoretype>PKCS12</srcstoretype>
               <srcstorepass>password</srcstorepass>
               <destkeystore>${project.build.directory}/classes/keystores/serverKeystore</destkeystore>
@@ -112,25 +140,49 @@
             </configuration>
           </execution>
           <execution>
-            <id>importRoot</id>
+            <id>importServer-rsa</id>
             <goals>
-              <goal>importCertificate</goal>
+              <goal>importKeystore</goal>
             </goals>
             <phase>compile</phase>
             <configuration>
-              <file>${project.build.directory}/classes/export/TEST_Root.crt</file>
-              <keystore>${project.build.directory}/classes/keystores/truststore</keystore>
-              <storepass>testtest</storepass>
-              <storetype>BCFKS</storetype>
-              <providername>BCFIPS</providername>
+              <alias>test-server-rsa</alias>
+              <srckeystore>${project.build.directory}/classes/export/TEST_Server_RSA.p12</srckeystore>
+              <srcstoretype>PKCS12</srcstoretype>
+              <srcstorepass>password</srcstorepass>
+              <destkeystore>${project.build.directory}/classes/keystores/serverKeystore</destkeystore>
+              <deststorepass>testtest</deststorepass>
+              <deststoretype>BCFKS</deststoretype>
+              <destprovidername>BCFIPS</destprovidername>
               <providerclass>org.bouncycastle.jcajce.provider.BouncyCastleFipsProvider</providerclass>
               <providerpath>${project.build.directory}/libs/bc-fips-1.0.2.jar</providerpath>
               <verbose>true</verbose>
-              <noprompt>true</noprompt>
             </configuration>
           </execution>
         </executions>
       </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-dependency-plugin</artifactId>
+        <version>3.1.1</version>
+        <executions>
+          <execution>
+            <id>unpack-dependencies</id>
+            <phase>process-resources</phase>
+            <goals>
+              <goal>unpack-dependencies</goal>
+            </goals>
+            <configuration>
+              <includesArtificatsIds>ca-bcfks-keystores</includesArtificatsIds>
+              <includes>**/generated/*, **/export/*</includes>
+              <outputDirectory>${project.build.directory}</outputDirectory>
+              <overWriteReleases>false</overWriteReleases>
+              <overWriteSnapshots>true</overWriteSnapshots>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+
     </plugins>
   </build>
 </project>

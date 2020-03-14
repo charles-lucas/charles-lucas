@@ -8,9 +8,8 @@
   <version>0.1-SNAPSHOT</version>
 
   <modules>
-    <module>ec-jks</module>
-    <module>rsa-jks</module>
-    <module>ec-bcfks</module>
-    <module>rsa-bcfks</module>
+    <module>ca-bcfks</module>
+    <module>subca-bcfks</module>
+    <module>client-bcfks</module>
   </modules>
 </project>

@@ -1,7 +1,7 @@
 <project>
   <modelVersion>4.0.0</modelVersion>
   <groupId>org.example</groupId>
-  <artifactId>ec-bcfks-keystores</artifactId>
+  <artifactId>ca-bcfks-keystores</artifactId>
   <version>1-SNAPSHOT</version>
   
   <dependencies>
@@ -63,51 +63,33 @@
         <version>1.5</version>
         <executions>
           <execution>
-          <id>importClient</id>
-            <goals>
-              <goal>importKeystore</goal>
-            </goals>
-            <phase>compile</phase>
-            <configuration>
-              <srckeystore>${project.build.directory}/classes/export/TEST_Client.p12</srckeystore>
-              <srcstoretype>PKCS12</srcstoretype>
-              <srcstorepass>password</srcstorepass>
-              <destkeystore>${project.build.directory}/classes/keystores/keystore</destkeystore>
-              <deststorepass>testtest</deststorepass>
-              <deststoretype>BCFKS</deststoretype>
-              <destprovidername>BCFIPS</destprovidername>
-              <providerclass>org.bouncycastle.jcajce.provider.BouncyCastleFipsProvider</providerclass>
-              <providerpath>${project.build.directory}/libs/bc-fips-1.0.2.jar</providerpath>
-              <verbose>true</verbose>
-            </configuration>
-          </execution>
-          <execution>
-            <id>importServer</id>
-            <goals>
-              <goal>importKeystore</goal>
-            </goals>
-            <phase>compile</phase>
-            <configuration>
-              <srckeystore>${project.build.directory}/classes/export/TEST_Server.p12</srckeystore>
-              <srcstoretype>PKCS12</srcstoretype>
-              <srcstorepass>password</srcstorepass>
-              <destkeystore>${project.build.directory}/classes/keystores/serverKeystore</destkeystore>
-              <deststorepass>testtest</deststorepass>
-              <deststoretype>BCFKS</deststoretype>
-              <destprovidername>BCFIPS</destprovidername>
-              <providerclass>org.bouncycastle.jcajce.provider.BouncyCastleFipsProvider</providerclass>
-              <providerpath>${project.build.directory}/libs/bc-fips-1.0.2.jar</providerpath>
-              <verbose>true</verbose>
-            </configuration>
-          </execution>
-          <execution>
-            <id>importRoot</id>
+            <id>importRoot-ec</id>
             <goals>
               <goal>importCertificate</goal>
             </goals>
             <phase>compile</phase>
             <configuration>
-              <file>${project.build.directory}/classes/export/TEST_Root.crt</file>
+              <alias>test-root-ec</alias>
+              <file>${project.build.directory}/classes/export/TEST_Root_EC.crt</file>
+              <keystore>${project.build.directory}/classes/keystores/truststore</keystore>
+              <storepass>testtest</storepass>
+              <storetype>BCFKS</storetype>
+              <providername>BCFIPS</providername>
+              <providerclass>org.bouncycastle.jcajce.provider.BouncyCastleFipsProvider</providerclass>
+              <providerpath>${project.build.directory}/libs/bc-fips-1.0.2.jar</providerpath>
+              <verbose>true</verbose>
+              <noprompt>true</noprompt>
+            </configuration>
+          </execution>
+          <execution>
+            <id>importRoot-rsa</id>
+            <goals>
+              <goal>importCertificate</goal>
+            </goals>
+            <phase>compile</phase>
+            <configuration>
+              <file>${project.build.directory}/classes/export/TEST_Root_RSA.crt</file>
+              <alias>test-root-rsa</alias>
               <keystore>${project.build.directory}/classes/keystores/truststore</keystore>
               <storepass>testtest</storepass>
               <storetype>BCFKS</storetype>

@@ -22,10 +22,21 @@
     </dependency>
     <dependency>
       <groupId>org.example</groupId>
-      <artifactId>ec-bcfks-keystores</artifactId>
+      <artifactId>ca-bcfks-keystores</artifactId>
       <version>1-SNAPSHOT</version>
     </dependency>
-    </dependencies>
+    <dependency>
+      <groupId>org.example</groupId>
+      <artifactId>subca-bcfks-keystores</artifactId>
+      <version>1-SNAPSHOT</version>
+    </dependency>
+    <dependency>
+      <groupId>org.example</groupId>
+      <artifactId>clients-bcfks-keystores</artifactId>
+      <version>1-SNAPSHOT</version>
+    </dependency>
+  </dependencies>
+
   <build>
 
     <pluginManagement>
@@ -90,7 +101,6 @@
               <goal>unpack-dependencies</goal>
             </goals>
             <configuration>
-              <includesArtificatsIds>ec-bcfks-keystores</includesArtificatsIds>
               <includes>**/keystore, **/truststore, **/serverKeystore</includes>
               <outputDirectory>${project.build.directory}</outputDirectory>
               <overWriteReleases>false</overWriteReleases>

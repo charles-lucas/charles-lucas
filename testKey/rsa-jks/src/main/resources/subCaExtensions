@@ -1,6 +1,0 @@
-authorityKeyIdentifier=keyid, issuer
-subjectKeyIdentifier=hash
-basicConstraints=CA:TRUE
-keyUsage=critical, digitalSignature, keyCertSign, cRLSign
-certificatePolicies=2.16.840.1.101.2.1.11.5, 2.16.840.1.101.2.1.11.9, 2.16.840.1.101.2.1.11.10
-subjectAltName=DNS:localhost
