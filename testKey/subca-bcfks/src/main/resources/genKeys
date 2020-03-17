@@ -1,14 +1,14 @@
 #!/usr/bin/bash
 
-echo "Making Sub CA"
-openssl ecparam -genkey -name secp521r1 > subca.ec.param
-cat subca.ec.param | openssl ec -out subca.ec.key
-openssl req -new -key subca.ec.key -out subca.ec.req -subj "/C=US/ST=CA/L=San Diego/O=TEST/OU=TEST/CN=TEST Sub CA EC"
-openssl x509 -req -days 7300 -sha512 -in subca.ec.req -CAcreateserial -CA "${project.build.directory}/export/TEST_Root_EC.crt" -CAkey ${project.build.directory}/generated/root.ec.key -out "TEST_Sub_CA_EC.crt" -extfile subCaExtensions
-cat "${project.build.directory}/export/TEST_Root_EC.crt" "TEST_Sub_CA_EC.crt" subca.ec.key > subca.ec.pem
-openssl ec -in subca.ec.pem -pubout -out subca.ec.pub
-openssl pkcs12 -export -in subca.ec.pem -out "TEST_Sub_CA_EC.p12" -name "TEST Sub CA EC" -passout "pass:password"
-openssl crl2pkcs7 -nocrl -certfile subca.ec.pem -out "TEST_Sub_CA_EC.p7b"
+#echo "Making Sub CA"
+#openssl ecparam -genkey -name secp521r1 > subca.ec.param
+#cat subca.ec.param | openssl ec -out subca.ec.key
+#openssl req -new -key subca.ec.key -out subca.ec.req -subj "/C=US/ST=CA/L=San Diego/O=TEST/OU=TEST/CN=TEST Sub CA EC"
+#openssl x509 -req -days 7300 -sha512 -in subca.ec.req -CAcreateserial -CA "${project.build.directory}/export/TEST_Root_EC.crt" -CAkey ${project.build.directory}/generated/root.ec.key -out "TEST_Sub_CA_EC.crt" -extfile subCaExtensions
+#cat "${project.build.directory}/export/TEST_Root_EC.crt" "TEST_Sub_CA_EC.crt" subca.ec.key > subca.ec.pem
+#openssl ec -in subca.ec.pem -pubout -out subca.ec.pub
+#openssl pkcs12 -export -in subca.ec.pem -out "TEST_Sub_CA_EC.p12" -name "TEST Sub CA EC" -passout "pass:password"
+#openssl crl2pkcs7 -nocrl -certfile subca.ec.pem -out "TEST_Sub_CA_EC.p7b"
 
 echo "Making Sub CA"
 openssl genrsa -out subca.rsa.key 3072

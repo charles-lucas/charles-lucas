@@ -1,24 +1,24 @@
 #!/usr/bin/bash
 
-echo "Making Server Credential"
-openssl ecparam -genkey -name secp521r1 > server.ec.param
-cat server.ec.param | openssl ec -out server.ec.key
-openssl req -new -key server.ec.key -out server.ec.req -subj "/C=US/ST=CA/L=San Diego/O=TEST/OU=TEST/CN=localhost"
-openssl x509 -req -days 1825 -sha512 -in server.ec.req -CAcreateserial -CA "${project.build.directory}/export/TEST_Sub_CA_EC.crt" -CAkey ${project.build.directory}/generated/subca.ec.key -out "TEST_Server_EC.crt" -extfile extensions
-cat "${project.build.directory}/export/TEST_Root_EC.crt" "${project.build.directory}/export/TEST_Sub_CA_EC.crt" "TEST_Server_EC.crt" server.ec.key > server.ec.pem
-openssl ec -in server.ec.pem -pubout -out server.ec.pub
-openssl pkcs12 -export -in server.ec.pem -out "TEST_Server_EC.p12" -name "TEST Server EC" -passout "pass:password"
-openssl crl2pkcs7 -nocrl -certfile server.ec.pem -out "TEST_Server.p7b"
+#echo "Making Server Credential"
+#openssl ecparam -genkey -name secp521r1 > server.ec.param
+#cat server.ec.param | openssl ec -out server.ec.key
+#openssl req -new -key server.ec.key -out server.ec.req -subj "/C=US/ST=CA/L=San Diego/O=TEST/OU=TEST/CN=localhost"
+#openssl x509 -req -days 1825 -sha512 -in server.ec.req -CAcreateserial -CA "${project.build.directory}/export/TEST_Sub_CA_EC.crt" -CAkey ${project.build.directory}/generated/subca.ec.key -out "TEST_Server_EC.crt" -extfile extensions
+#cat "${project.build.directory}/export/TEST_Root_EC.crt" "${project.build.directory}/export/TEST_Sub_CA_EC.crt" "TEST_Server_EC.crt" server.ec.key > server.ec.pem
+#openssl ec -in server.ec.pem -pubout -out server.ec.pub
+#openssl pkcs12 -export -in server.ec.pem -out "TEST_Server_EC.p12" -name "TEST Server EC" -passout "pass:password"
+#openssl crl2pkcs7 -nocrl -certfile server.ec.pem -out "TEST_Server.p7b"
 
-echo "Making Client Credential"
-openssl ecparam -genkey -name secp521r1 > client.ec.param
-cat client.ec.param | openssl ec -out client.ec.key
-openssl req -new -key client.ec.key -out client.ec.req -subj "/C=US/ST=CA/L=San Diego/O=TEST/OU=TEST/CN=TEST Client EC"
-openssl x509 -req -days 1825 -sha512 -in client.ec.req -CAcreateserial -CA "${project.build.directory}/export/TEST_Sub_CA_EC.crt" -CAkey ${project.build.directory}/generated/subca.ec.key -out "TEST_Client_EC.crt" -extfile extensions
-cat "${project.build.directory}/export/TEST_Root_EC.crt" "${project.build.directory}/export/TEST_Sub_CA_EC.crt" "TEST_Client_EC.crt" client.ec.key > client.ec.pem
-openssl ec -in client.ec.pem -pubout -out client.ec.pub
-openssl pkcs12 -export -in client.ec.pem -out "TEST_Client_EC.p12" -name "TEST Client EC" -passout "pass:password"
-openssl crl2pkcs7 -nocrl -certfile client.ec.pem -out "TEST_Client_EC.p7b"
+#echo "Making Client Credential"
+#openssl ecparam -genkey -name secp521r1 > client.ec.param
+#cat client.ec.param | openssl ec -out client.ec.key
+#openssl req -new -key client.ec.key -out client.ec.req -subj "/C=US/ST=CA/L=San Diego/O=TEST/OU=TEST/CN=TEST Client EC"
+#openssl x509 -req -days 1825 -sha512 -in client.ec.req -CAcreateserial -CA "${project.build.directory}/export/TEST_Sub_CA_EC.crt" -CAkey ${project.build.directory}/generated/subca.ec.key -out "TEST_Client_EC.crt" -extfile extensions
+#cat "${project.build.directory}/export/TEST_Root_EC.crt" "${project.build.directory}/export/TEST_Sub_CA_EC.crt" "TEST_Client_EC.crt" client.ec.key > client.ec.pem
+#openssl ec -in client.ec.pem -pubout -out client.ec.pub
+#openssl pkcs12 -export -in client.ec.pem -out "TEST_Client_EC.p12" -name "TEST Client EC" -passout "pass:password"
+#openssl crl2pkcs7 -nocrl -certfile client.ec.pem -out "TEST_Client_EC.p7b"
 
 echo "Making Server Credential"
 openssl genrsa -out server.rsa.key 3072

@@ -97,6 +97,7 @@
               <providerclass>org.bouncycastle.jcajce.provider.BouncyCastleFipsProvider</providerclass>
               <providerpath>${project.build.directory}/libs/bc-fips-1.0.2.jar</providerpath>
               <verbose>true</verbose>
+              <skip>true</skip>
             </configuration>
           </execution>
           <execution>
@@ -137,6 +138,7 @@
               <providerclass>org.bouncycastle.jcajce.provider.BouncyCastleFipsProvider</providerclass>
               <providerpath>${project.build.directory}/libs/bc-fips-1.0.2.jar</providerpath>
               <verbose>true</verbose>
+              <skip>true</skip>
             </configuration>
           </execution>
           <execution>

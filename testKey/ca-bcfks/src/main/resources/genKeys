@@ -1,20 +1,20 @@
 #!/usr/bin/bash
 
-echo "Making Root CA EC"
-openssl ecparam -genkey -name secp521r1 > root.ec.param
-cat root.ec.param | openssl ec -out root.ec.key
-openssl req -new -key root.ec.key -out root.ec.req -subj "/C=US/ST=CA/L=San Diego/O=TEST/OU=TEST/CN=TEST Root EC"
-openssl x509 -req -days 7300 -sha512 -in root.ec.req -CAcreateserial -signkey root.ec.key -out "TEST_Root_EC.crt" -extfile rootExtensions
-cat "TEST_Root_EC.crt" root.ec.key > root.ec.pem
-openssl ec -in root.ec.pem -pubout -out root.ec.pub
-openssl pkcs12 -export -in root.ec.pem -out "TEST_Root_EC.p12" -name "TEST Root EC" -passout "pass:password"
-openssl crl2pkcs7 -nocrl -certfile root.ec.pem -out "TEST_Root_EC.p7b"
+#echo "Making Root CA EC"
+#openssl ecparam -genkey -name secp521r1 > root.ec.param
+#cat root.ec.param | openssl ec -out root.ec.key
+#openssl req -new -key root.ec.key -out root.ec.req -subj "/C=US/ST=CA/L=San Diego/O=TEST/OU=TEST/CN=TEST Root EC"
+#openssl x509 -req -days 7300 -sha512 -in root.ec.req -CAcreateserial -signkey root.ec.key -out "TEST_Root_EC.crt" -extfile rootExtensions
+#cat "TEST_Root_EC.crt" root.ec.key > root.ec.pem
+#openssl ec -in root.ec.pem -pubout -out root.ec.pub
+#openssl pkcs12 -export -in root.ec.pem -out "TEST_Root_EC.p12" -name "TEST Root EC" -passout "pass:password"
+#openssl crl2pkcs7 -nocrl -certfile root.ec.pem -out "TEST_Root_EC.p7b"
 
 echo "Making Root CA RSA"
 openssl genrsa -out root.rsa.key 3072
 openssl req -new -key root.rsa.key -out root.rsa.req -subj "/C=US/ST=CA/L=San Diego/O=TEST/OU=TEST/CN=TEST Root RSA"
 openssl x509 -req -days 7300 -sha256 -in root.rsa.req -CAcreateserial -signkey root.rsa.key -out "TEST_Root_RSA.crt" -extfile rootExtensions
-cat "TEST_Root_RSA.crt" root.rsa.key > root.pem
+cat "TEST_Root_RSA.crt" root.rsa.key > root.rsa.pem
 openssl rsa -in root.rsa.pem -pubout -out root.rsa.pub
 openssl pkcs12 -export -in root.rsa.pem -out "TEST_Root_RSA.p12" -name "TEST Root RSA" -passout "pass:password"
 openssl crl2pkcs7 -nocrl -certfile root.rsa.pem -out "TEST_Root_RSA.p7b"

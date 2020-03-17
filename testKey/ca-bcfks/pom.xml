@@ -79,6 +79,7 @@
               <providerpath>${project.build.directory}/libs/bc-fips-1.0.2.jar</providerpath>
               <verbose>true</verbose>
               <noprompt>true</noprompt>
+              <skip>true</skip>
             </configuration>
           </execution>
           <execution>
