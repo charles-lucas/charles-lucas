@@ -10,7 +10,7 @@
   <packaging>jar</packaging>
  
   <properties>
-     <jettyVersion>9.4.35.v20201120</jettyVersion>
+     <jettyVersion>9.4.38.v20210224</jettyVersion>
   </properties>
 
   <dependencies>
